@@ -696,7 +696,7 @@ def funk_rename(addr, funk):
 	global rename_cnt
 	name = funk.name
 	if name != '?':
-		funk = getFunctionAt(parseAddress(hex(addr)))
+		funk = getFunctionAt(parseAddress(hex(addr).strip('L')))
 		funk.setName(name, SourceType.USER_DEFINED)
 		rename_cnt += 1
 	return
@@ -708,7 +708,7 @@ def apply_sig(flirt):
 	while funk is not None:
 		funk_start = int(funk.entryPoint.toString(), 16)
 		funk_end   = get_function_end(funk)
-		funk_buf   = getBytes(parseAddress(hex(funk_start)), funk_end - funk_start + 0x100)
+		funk_buf   = getBytes(parseAddress(hex(funk_start).strip('L')), funk_end - funk_start + 0x100)
 		#print('%x - %x' % (funk_start, funk_end))
 		match_function(flirt, funk_buf, funk_start, funk_rename)
 		funk = getFunctionAfter(funk)
