@@ -429,7 +429,7 @@ def parse_header(f):
 		if version >= 8:
 			pattern_size = read_u16le(f)
 
-			if version >= 9:
+			if version > 9:
 				read_u16le(f) #unknow
 
 	library_name = f.read(library_name_len)
